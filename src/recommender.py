@@ -62,3 +62,49 @@ def recommend_songs(user_prefs: Dict, songs: List[Dict], k: int = 5) -> List[Tup
     # TODO: Implement scoring and ranking logic
     # Expected return format: (song_dict, score, explanation)
     return []
+import csv
+
+def load_songs(path):
+    songs = []
+    with open(path, newline='') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            row["energy"] = float(row["energy"])
+            row["tempo_bpm"] = int(row["tempo_bpm"])
+            songs.append(row)
+    return songs
+
+
+def score_song(user_prefs, song):
+    score = 0
+    reasons = []
+
+    # Genre match
+    if song["genre"] == user_prefs["genre"]:
+        score += 2.0
+        reasons.append("genre match (+2.0)")
+
+    # Mood match
+    if song["mood"] == user_prefs["mood"]:
+        score += 1.0
+        reasons.append("mood match (+1.0)")
+
+    # Energy similarity
+    energy_diff = abs(song["energy"] - user_prefs["energy"])
+    energy_score = 1 - energy_diff
+    score += energy_score
+    reasons.append(f"energy similarity (+{round(energy_score,2)})")
+
+    return score, reasons
+
+
+def recommend_songs(user_prefs, songs, k=5):
+    scored = []
+
+    for song in songs:
+        score, reasons = score_song(user_prefs, song)
+        scored.append((song, score, reasons))
+
+    ranked = sorted(scored, key=lambda x: x[1], reverse=True)
+
+    return ranked[:k]

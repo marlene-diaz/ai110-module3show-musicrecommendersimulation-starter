@@ -2,22 +2,25 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
+I wanted to feature some personalized filtering into the project and I used copilot with chatgpt to creat the vision I wanted.
+It took some time figuring out how to explain exactly what I wanted into the project itself however I didn't have the most creative
+outlook to back it up. I took some actual time to study how spotify uses filtering into their application and of course used my own 
+knowledge of DJing , to find the BPM of songs.
 
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
 
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
+This system simulates how real-world music recommendation systems work using content-based filtering methods.
+Spotify and YouTube use both filtering (collaborativeand content-based) varies by attributes.
+
+I focused on content-based filtering by comparing song features such as genre, mood, and energy to user's preferences.
+ Each song is given a score based on how closely it matches the user profile. 
+Ranking them from highest to lowest score, and the top results are recommended.
+
+The system prioritizes genre matches most strongly,then mood, and then uses a similarity calculation for energy 
+to feel the overall vibe of the song.
 
 Some prompts to answer:
 
@@ -29,6 +32,16 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+Features Used:
+- Genre
+- Mood
+- Energy
+- Tempo (BPM)
+
+User Profile:
+- Preferred genre
+- Preferred mood
+- Target energy level
 ---
 
 ## Getting Started
